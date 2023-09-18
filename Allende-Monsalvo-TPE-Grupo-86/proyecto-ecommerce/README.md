@@ -1,1 +1,0 @@
-Se realizará un proyecto de ecommerce gaming 
