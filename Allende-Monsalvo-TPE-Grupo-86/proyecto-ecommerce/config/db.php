@@ -8,6 +8,13 @@ todas las funciones que se conecten con la base de datos para hacer consultas */
     Acá iria 
     function getConnection(){
         devuelve una variable $db que va a tomar un PDO(donde esté localizado la tabla de juegos)
+        $db= new 
+        PDO('mysql:host=localhost;dbname=db_ecommerce;charset=utf8','root', '');
+        
+        $query = $db->prepare('SELECT * FROM juegos');
+        $query->execute();
+        $query->fetchAll(PDO::FETCH_OBJ);
+    
     }
     function getGames(){
         declararia una variable $db que tome la funcion de arriba

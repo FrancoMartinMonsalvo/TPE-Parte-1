@@ -5,10 +5,11 @@ y a partir de ella implementar las funcionalidades como
 agregar producto, eliminar producto, editar producto. 
 
 /* Funcion showGames()para mostrar los juegos {
-    aca se requeriria el header
+    aca se requeriria el allProducts.php
+    require_once '/public/allProducts.php' ;
 
     despues se obtendria los juegos con una variable 
-    no sé $games = getGames(); para obtener los juegos de la db
+    $games = getGames(); para obtener los juegos de la db
 
     despues se requeriria un archivo php como AllProducts
     donde dentro de él este la accion de "agregar" juegos con un method "POST"
