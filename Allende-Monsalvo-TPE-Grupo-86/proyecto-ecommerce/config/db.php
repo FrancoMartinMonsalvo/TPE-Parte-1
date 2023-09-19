@@ -11,14 +11,18 @@ todas las funciones que se conecten con la base de datos para hacer consultas */
         $db= new 
         PDO('mysql:host=localhost;dbname=db_ecommerce;charset=utf8','root', '');
         
-        $query = $db->prepare('SELECT * FROM juegos');
-        $query->execute();
-        $query->fetchAll(PDO::FETCH_OBJ);
+        return $db;
     
     }
     function getGames(){
+        $db = getConnection();
         declararia una variable $db que tome la funcion de arriba
 
+                
+        $query = $db->prepare('SELECT * FROM juegos');
+        $query->execute();
+        $query->fetchAll(PDO::FETCH_OBJ);
+        
         variable query que toma el valor de $db, lo preparo(selecciono todo de la tabla juegos);
         $query-> la ejecuto ();
 
