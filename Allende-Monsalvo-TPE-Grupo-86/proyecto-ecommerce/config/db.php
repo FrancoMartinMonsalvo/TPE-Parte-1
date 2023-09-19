@@ -19,17 +19,17 @@ todas las funciones que se conecten con la base de datos para hacer consultas */
         declararia una variable $db que tome la funcion de arriba
 
                 
-        $query = $db->prepare('SELECT * FROM juegos');
-        $query->execute();
-        $query->fetchAll(PDO::FETCH_OBJ);
-        
         variable query que toma el valor de $db, lo preparo(selecciono todo de la tabla juegos);
-        $query-> la ejecuto ();
-
-        games es un arreglo de juegos
-        $games= $query->fetchAll(PDO::FETCH_OBJ);
+        $query = $db->prepare('SELECT * FROM juegos');
         
-        retorno los juegos return $games;
+        $query->execute();
+         
+        games es un arreglo de juegos
+        $query->fetchAll(PDO::FETCH_OBJ);
+
+
+        retorno los juegos 
+        return $games;
 
     }
     aca tendríamos otras funciones como las siguientes
