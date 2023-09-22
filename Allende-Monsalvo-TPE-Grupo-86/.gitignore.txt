@@ -1,0 +1,2 @@
+# Ignorar carpeta proyecto-ecommerce
+proyecto-ecommerce
