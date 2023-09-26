@@ -8,4 +8,3 @@ Breve descripcion de la tematica: - Lo que buscamos en este proyecto, es satisfa
 
 
 Imagen de la tabla de relacion entidad (DER):
-![image](https://github.com/FrancoMartinMonsalvo/TPE-Parte-1/assets/29075572/30313c01-f142-4be2-92db-3f5fefd9a052)
