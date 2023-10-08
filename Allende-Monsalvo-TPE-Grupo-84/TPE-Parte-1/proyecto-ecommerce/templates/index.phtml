@@ -12,12 +12,13 @@
         <div class="card my-2">
             <div class="card-header">
                 <h5 class="card-title">
-                    <a href="" class="link-info link-underline link-underline-opacity-0">
+                    <a href="game/<?= $key ?>" class="link-info link-underline link-underline-opacity-0">
                         <?= $item->Nombre ?>
                     </a>
                 </h5>
             </div>
             <div class="card-body">
+                <img src="<?= $item->Imagen ?>" alt="<?= $item->Nombre ?>" class="mb-2 object-fit-cover" style="max-width: 460px;">
                 <p class="card-text">Precio: <?= $item->Precio; ?></p>
                 <p class="card-text">Categoria: <?= $item->Categoria; ?></p>
             </div>
@@ -26,14 +27,14 @@
         <div class="card my-2">
             <div class="card-header">
                 <h5 class="card-title">
-                    <a href="category/<?= $key ?>" class="link-info link-underline link-underline-opacity-0">
+                    <a href="category/<?= $key ?>" class="fs-3 link-info link-underline link-underline-opacity-0">
                         <?= $item->Nombre ?>
                     </a>
                 </h5>
             </div>
             <div class="card-body">
-                <p class="card-text">Descripción: <?= $item->Descripcion; ?></p>
-                <p class="card-text">Cantidad de juegos: <?= $item->Cantidad_juegos; ?></p>
+                <p class="card-text fw-bold"><?= $item->Descripcion; ?></p>
+                <p class="card-text">Cantidad de juegos disponibles: <?= $item->Cantidad_juegos; ?></p>
                 <h6 class="card-subtitle mb-2 text-muted">Juegos en dicha categoría:</h6>
                 <?php $nombreJuegos = explode(",", $item->NombresJuegos) ?>
                 <ul class="list-group">

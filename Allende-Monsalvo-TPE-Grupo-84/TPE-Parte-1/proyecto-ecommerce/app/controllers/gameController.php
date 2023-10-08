@@ -19,4 +19,11 @@ class GameController
 
         $this->view->showGames($items);
     }
+
+    public function showGameById($id)
+    {
+        $item = $this->model->getGames($id);
+
+        $this->view->showGameById($item, $id);
+    }
 }
