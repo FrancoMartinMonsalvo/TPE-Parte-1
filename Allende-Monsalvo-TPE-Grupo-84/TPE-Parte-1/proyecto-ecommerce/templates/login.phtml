@@ -1,0 +1,27 @@
+<?php require 'templates/header.phtml' ?>
+
+    <h2 class="text-center"> Por favor, antes de ingresar a la pagina logueate </h1>
+    <div class="mt-5 w-25 mx-auto">
+        <form method="POST" action="auth">
+            <div class="form-group">
+                <label for="Username">Username</label>
+                <input type="text" required class="form-control" id="Username" name="Username" aria-describedby="UsernameHelp">
+            </div>
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input type="password" required class="form-control" id="Password" name="Password">
+            </div>
+
+            <?php if ($error) : ?>
+                <div class='alert alert-danger' role='alert'>
+                    <?= $error ?>
+                </div> 
+            <?php endif ?>
+       
+            <button type="submit" class="btn btn-primary mt-3">Entrar</button>
+        </form>
+    </div>
+
+<?php require 'templates/footer.phtml' ?>
+
+
