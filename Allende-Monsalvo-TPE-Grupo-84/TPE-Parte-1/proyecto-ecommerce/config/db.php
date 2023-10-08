@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+// Solo conexión a base de datos
 
 class Database
 {
