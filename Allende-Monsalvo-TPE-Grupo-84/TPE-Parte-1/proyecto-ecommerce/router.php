@@ -14,8 +14,6 @@ if (!empty($_GET['action'])) {
 $params = explode('/', $action);
 $controllerGames = new GameController();
 $controllerCategories = new CategoryController();
-$controllerGames = new GameController();
-$controllerCategories = new CategoryController();
 
 switch ($params[0]){
     case 'home':
