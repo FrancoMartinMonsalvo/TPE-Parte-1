@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ecommerce Gaming</title>
+</head>
+
+<?php require 'header.phtml' ?>
+
+<?php foreach ($items as $key => $item) : ?>
+    <?php if (isset($item->Id_juego)) : ?>
+        <div class="card my-2">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <a href="" class="link-info link-underline link-underline-opacity-0">
+                        <?= $item->Nombre ?>
+                    </a>
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Precio: <?= $item->Precio; ?></p>
+                <p class="card-text">Categoria: <?= $item->Categoria; ?></p>
+            </div>
+        </div>
+    <?php elseif (!isset($item->Id_juego)) : ?>
+        <div class="card my-2">
+            <div class="card-header">
+                <h5 class="card-title">
+                    <a href="category/<?= $key ?>" class="link-info link-underline link-underline-opacity-0">
+                        <?= $item->Nombre ?>
+                    </a>
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Descripción: <?= $item->Descripcion; ?></p>
+                <p class="card-text">Cantidad de juegos: <?= $item->Cantidad_juegos; ?></p>
+                <h6 class="card-subtitle mb-2 text-muted">Juegos en dicha categoría:</h6>
+                <?php $nombreJuegos = explode(",", $item->NombresJuegos) ?>
+                <ul class="list-group">
+                    <?php foreach ($nombreJuegos as $nombreJuego) : ?>
+                        <li class="list-group-item"><?= $nombreJuego ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endforeach; ?>
+
+<?php require 'footer.phtml' ?>
+</body>
+
+</html>
