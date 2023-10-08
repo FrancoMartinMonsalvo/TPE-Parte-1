@@ -14,6 +14,8 @@ if (!empty($_GET['action'])) {
 $params = explode('/', $action);
 $controllerGames = new GameController();
 $controllerCategories = new CategoryController();
+$controllerGames = new GameController();
+$controllerCategories = new CategoryController();
 
 switch ($params[0]){
     case 'home':
@@ -28,27 +30,14 @@ switch ($params[0]){
     case 'register':
         $controller = new UserController();
         $controller->signup(); 
-        
         break;
-    case 'signup':
-            $controller = new UserController();
-            $controller->showSignupForm();  
-        
-        break;         
-    case 'login':
-        $controller = new UserController();
-        $controller->showLogin(); 
-        
+    case 'agregar' : 
+        addGame();
         break;
-    case 'auth':
-        $controller = new AuthController();
-        $controller->auth();
-        
+    case 'eliminar' : 
+        removeGame($params[1]);
+        break;        
+    default:
+        echo "404 Page Not Found";
         break;
-    case 'logout':
-        $controller = new UserController();
-        $controller->logout();
-        
-        break;
-
 }
