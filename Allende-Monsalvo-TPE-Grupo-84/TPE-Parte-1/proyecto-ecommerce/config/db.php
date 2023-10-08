@@ -1,16 +1,38 @@
 <?php
+require_once 'config.php';
 // Solo conexión a base de datos
 
-/*   
-    EJEMPLO PARA ENTENDER MEJOR LA FUNCIONALIDAD DEL ARCHIVO
+class Database
+{
+    private $host;
+    private $dbname;
+    private $user;
+    private $password;
+    private $conn;
 
-    Acá iria 
-    function getConnection(){
-        devuelve una variable $db que va a tomar un PDO(donde esté localizado la tabla de juegos)
-        $db= new 
-        PDO('mysql:host=localhost;dbname=db_ecommerce;charset=utf8','root', '');
-        
-        return $db;
-    
+    function __construct()
+    {
+        $this->host = DB_HOST;
+        $this->dbname = DB_NAME;
+        $this->user = DB_USER;
+        $this->password = DB_PASSWORD;
+
+        try {
+            $dsn = "mysql:host={$this->host};dbname={$this->dbname}";
+            $this->conn = new PDO($dsn, $this->user, $this->password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            die("Error de conexión: " . $e->getMessage());
+        }
     }
-*/
+
+    public function getConnection()
+    {
+        return $this->conn;
+    }
+
+    public function closeConnection()
+    {
+        $this->conn = null;
+    }
+}
