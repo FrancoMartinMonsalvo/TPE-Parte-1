@@ -12,11 +12,6 @@ class UserController {
         $this->view = new AuthView();
         $this->userModel = new UserModel();
     }
-
-    public function showLogin () {
-        $this->view->showLogin();
-    }
-
     public function logout() {
         AuthHelper::logout();
         header('Location: ' . BASE_URL);

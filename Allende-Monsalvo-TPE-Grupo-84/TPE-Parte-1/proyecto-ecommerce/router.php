@@ -42,10 +42,13 @@ switch ($params[0]) {
 
                 break;
         case 'login':
-                $controller = new UserController();
+                $controller = new AuthController();
                 $controller->showLogin();
 
                 break;
+        case 'adminlogin':
+                $controller = new AuthController();
+                $controller->showAdminLogin();        
         case 'auth':
                 $controller = new AuthController();
                 $controller->auth();
@@ -54,6 +57,7 @@ switch ($params[0]) {
         case 'logout':
                 $controller = new UserController();
                 $controller->logout();
+        break;        
         default:
                 echo "404 Page Not Found";
                 break;

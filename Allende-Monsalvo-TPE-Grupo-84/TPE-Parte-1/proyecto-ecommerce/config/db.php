@@ -7,6 +7,7 @@ class Database
     private $host;
     private $dbname;
     private $user;
+    private $EsAdmin;
     private $password;
     private $conn;
 

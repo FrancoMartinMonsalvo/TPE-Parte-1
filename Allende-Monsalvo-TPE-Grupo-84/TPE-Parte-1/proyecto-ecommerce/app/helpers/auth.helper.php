@@ -9,7 +9,7 @@ class AuthHelper {
 
     public static function login($user) {
         AuthHelper::init();
-        $_SESSION['Id_Usuario'] = $user->id;
+        $_SESSION['Id_usuario'] = $user->id;
         $_SESSION['Password'] = $user->Password; 
     }
 
