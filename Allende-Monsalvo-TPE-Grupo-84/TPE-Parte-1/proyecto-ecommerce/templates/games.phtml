@@ -1,0 +1,38 @@
+<?php require_once 'header.phtml' ?>
+
+<div class="d-flex justify-content-between align-items-center mx-2">
+    <div>
+        <h1>Lista de Juegos</h1>
+    </div>
+    <?php if (isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) : ?>
+        <div>
+            <a href="formGame" type="button" class="btn btn-primary mb-1">addGame</a>
+        </div>
+    <?php endif; ?>
+</div>
+<?php foreach ($games as $key => $game) : ?>
+    <div class="card my-2">
+        <div class="card-header">
+            <h5 class="card-title">
+                <a href="game/<?= $key ?>" style="text-decoration: none; font-size: 30px;">
+                    <?= $game->Nombre ?>
+                </a>
+            </h5>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div class="card-body">
+                <img src="<?= $game->Imagen ?>" alt="<?= $game->Nombre ?>" class="mb-2 object-fit-cover" style="max-width: 460px;">
+                <p class="card-text">Precio: $<?= $game->Precio; ?></p>
+                <p class="card-text">Categoria: <?= $game->Categoria; ?></p>
+            </div>
+            <?php if (isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) : ?>
+                <div class="d-flex flex-column align-items-center justify-content-center me-3">
+                    <a href="editGame/<?= $game->Id_juego . "/" . $key ?>" type="button" class="btn btn-primary mb-1">Edit</a>
+                    <a href="deleteGame/<?= $game->Id_juego ?>?>" type="button" class="btn btn-danger mt-1">Delete</a>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+<?php require_once 'footer.phtml' ?>

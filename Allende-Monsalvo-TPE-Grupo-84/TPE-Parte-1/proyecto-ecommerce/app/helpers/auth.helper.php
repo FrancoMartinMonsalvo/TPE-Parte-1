@@ -1,26 +1,32 @@
 <?php
-class AuthHelper {
+class AuthHelper
+{
 
-    public static function init() {
+    public static function init()
+    {
         if (session_status() != PHP_SESSION_ACTIVE) {
             session_start();
         }
     }
 
-    public static function login($user) {
+    public static function login($user)
+    {
         AuthHelper::init();
-        $_SESSION['Id_usuario'] = $user->id;
-        $_SESSION['Password'] = $user->Password; 
+        $_SESSION['USER_ID'] = $user->Id_usuario;
+        $_SESSION['USER_USERNAME'] = $user->Username;
+        $_SESSION['USER_IS_ADMIN'] = $user->EsAdmin;
     }
 
-    public static function logout() {
+    public static function logout()
+    {
         AuthHelper::init();
         session_destroy();
     }
 
-    public static function verify() {
+    public static function verify()
+    {
         AuthHelper::init();
-        if (!isset($_SESSION['Id_usuario'])) {
+        if (!isset($_SESSION['USER_ID'])) {
             header('Location: ' . BASE_URL . 'login');
             die();
         }

@@ -1,0 +1,37 @@
+<?php require_once 'header.phtml' ?>
+
+<div class="container">
+    <h1><?= $mode === 'add' ? 'Agregar' : 'Editar'; ?> Juego</h1>
+    <form action="<?= $mode === 'add' ? "addGame" : "editGame/" . $id ?>" method="POST">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre del Juego</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required value="<?= $mode === 'edit' ? $game[$key]->Nombre : "" ?>">
+        </div>
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio del Juego</label>
+            <input type="number" class="form-control" id="precio" name="precio" required value="<?= $mode === 'edit' ? $game[$key]->Precio : "" ?>">
+        </div>
+        <div class="mb-3">
+            <label for="categoria" class="form-label">Categoría del Juego</label>
+            <select class="form-select" id="categoria" name="categoria" required>
+                <option value="" selected disabled>SELECIONAR UNA OPCIÓN</option>
+                <?php foreach ($categories as $category) : ?>
+                    <option value=" <?= $category->Id_categoria ?>"><?= $category->Nombre ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="mb-3 d-flex align-items-center">
+            <div class="w-75 me-3">
+                <label for="imagen" class="form-label">Imagen del Juego (LINK)</label>
+                <input type="text" class="form-control" id="imagen" name="imagen" required value="<?= $mode === 'edit' ? $game[$key]->Imagen : "" ?>">
+            </div>
+            <?php if ($mode === 'edit') : ?>
+                <div>
+                    <p class="mb-0">Imagen actual:</p>
+                    <img src="<?= $game[$key]->Imagen ?>" alt="" style="max-width: 150px;">
+                </div>
+            <?php endif; ?>
+        </div>
+        <button type="submit" class="btn btn-primary"><?= $mode === 'add' ? 'Agregar' : 'Editar'; ?> Juego</button>
+    </form>
+</div>

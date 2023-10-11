@@ -1,31 +1,31 @@
 <?php
-require_once 'app/models/userModel.php';
-require_once 'app/helpers/auth.helper.php';
-require_once 'app/views/authView.php';
+require_once './app/models/userModel.php';
+require_once './app/views/userView.php';
 
-class UserController {
-
-    private $view;
+class UserController
+{
     private $userModel;
+    private $userView;
 
-    function __construct() {
-        $this->view = new AuthView();
+    function __construct()
+    {
         $this->userModel = new UserModel();
+        $this->userView = new UserView();
     }
-    public function logout() {
-        AuthHelper::logout();
-        header('Location: ' . BASE_URL);
+
+    public function showRegister()
+    {
+        $this->userView->showRegister();
     }
-    public function showSignupForm() {
-        require_once 'templates/signupView.phtml';
-    }
-    public function signup() {
+
+    public function signup()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['Email'];
             $username = $_POST['Username'];
             $password = $_POST['Password'];
 
-            $userCreated = $this->userModel->createUser( $email, $username, $password);
+            $userCreated = $this->userModel->createUser($email, $username, $password);
             if ($userCreated) {
                 header('Location: ' . BASE_URL);
                 exit();

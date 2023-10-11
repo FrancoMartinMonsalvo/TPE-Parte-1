@@ -1,27 +1,19 @@
-<?php
-require_once 'header.phtml';
-$item = $item[$id];
-$nombresJuegos = explode(",", $item->NombresJuegos);
-$imagenesJuegos = explode(",", $item->ImagenesJuegos);
-?>
+<?php require_once 'header.phtml' ?>
 
-<h1 class="text-center"><?= $item->Nombre ?></h1>
-<div class="row justify-content-center align-items-center mb-3">
-    <div class=" col-md-8 text-center">
-        <h6 class="text-center"><?= $item->Descripcion ?></h6>
-    </div>
-</div>
-<h6 class="ms-3">Cantidad de juegos en esta categoría: <?= $item->Cantidad_juegos ?></h6>
+<h1><?= $games[0]->nombreCategoria ?></h1>
+<p class="fw-bold"><?= $games[0]->descCategoria; ?></p>
+<p>Cantidad de juegos disponibles: <?= $games[0]->cantidadJuegos; ?></p>
+
 <div class="container mt-4">
     <h5 class="text-center">Lista de juegos: </h5>
     <ul>
         <div class="row">
-            <?php foreach ($nombresJuegos as $key => $nombreJuego) : ?>
+            <?php foreach ($games as $key => $game) : ?>
                 <div class="col-md-4 col-sm-6 mb-4">
                     <div class="card" style="width: 100%;">
-                        <img src="<?= $imagenesJuegos[$key] ?>" class="card-img-top" alt="Imagen del producto" style="max-height: 165px;">
+                        <img src="<?= $game->Imagen ?>" class="card-img-top" alt="Imagen del producto" style="max-height: 165px;">
                         <div class="card-body text-center">
-                            <h4 class="card-title"><?= $nombreJuego ?></h4>
+                            <h4 class="card-title"><?= $game->Nombre ?></h4>
                         </div>
                     </div>
                 </div>
@@ -29,3 +21,5 @@ $imagenesJuegos = explode(",", $item->ImagenesJuegos);
         </div>
     </ul>
 </div>
+
+<?php require_once 'footer.phtml' ?>

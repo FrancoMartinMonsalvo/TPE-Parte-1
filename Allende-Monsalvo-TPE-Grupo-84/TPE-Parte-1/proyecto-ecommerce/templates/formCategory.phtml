@@ -1,0 +1,20 @@
+<?php require_once 'header.phtml' ?>
+
+<div class="container">
+    <h1><?= $mode === 'add' ? 'Agregar' : 'Editar'; ?> Categoría de Juego</h1>
+    <form action="<?= $mode === 'add' ? 'addCategory' : 'editCategory/' . $id ?>" method="POST">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre de la Categoría</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required value="<?= $mode === 'edit' ? $category[$key]->Nombre : "" ?>">
+        </div>
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción de la Categoría</label>
+            <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required><?= $mode === 'edit' ? $category[$key]->Descripcion : "" ?></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <?= $mode === 'add' ? 'Agregar' : 'Editar' ?> Categoría
+        </button>
+    </form>
+</div>
+
+<?php require_once 'footer.phtml' ?>

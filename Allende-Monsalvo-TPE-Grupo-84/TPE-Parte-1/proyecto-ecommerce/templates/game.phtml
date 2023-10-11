@@ -3,11 +3,11 @@
 <div class="container mt-5">
     <div class="d-flex justify-content-center">
         <div class="card" style="width: 20rem;">
-            <img src="<?= $item[$id]->Imagen ?>" class="card-img-top" alt="Imagen del producto" style="max-height: 350px;">
+            <img src="<?= $game[$id]->Imagen ?>" class="card-img-top" alt="Imagen del producto" style="max-height: 350px;">
             <div class="card-body text-center">
-                <h2 class="card-title"><?= $item[$id]->Nombre ?></h2>
-                <p class="card-text">Categoría: <?= $item[$id]->Categoria ?></p>
-                <p class="card-text">$<?= $item[$id]->Precio ?></p>
+                <h2 class="card-title"><?= $game[$id]->Nombre ?></h2>
+                <p class="card-text">Categoría: <?= $game[$id]->Categoria ?></p>
+                <p class="card-text">$<?= $game[$id]->Precio ?></p>
             </div>
         </div>
     </div>
