@@ -14,9 +14,11 @@
         <div class="mb-3">
             <label for="categoria" class="form-label">Categoría del Juego</label>
             <select class="form-select" id="categoria" name="categoria" required>
-                <option value="" selected disabled>SELECIONAR UNA OPCIÓN</option>
+                <option value="" selected><?= $categories[$key]->Nombre ?></option>
                 <?php foreach ($categories as $category) : ?>
-                    <option value=" <?= $category->Id_categoria ?>"><?= $category->Nombre ?></option>
+                    <?php if ($category->Nombre !== $categories[$key]->Nombre) : ?>
+                        <option value=" <?= $category->Id_categoria ?>"><?= $category->Nombre ?></option>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </select>
         </div>
