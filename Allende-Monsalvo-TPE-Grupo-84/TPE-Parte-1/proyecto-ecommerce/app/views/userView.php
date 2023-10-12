@@ -6,4 +6,14 @@ class UserView
     {
         require_once './templates/register.phtml';
     }
+
+    public function showListUsers($users)
+    {
+        require_once './templates/listUsers.phtml';
+    }
+
+    public function showError($error)
+    {
+        require './templates/error.phtml';
+    }
 }

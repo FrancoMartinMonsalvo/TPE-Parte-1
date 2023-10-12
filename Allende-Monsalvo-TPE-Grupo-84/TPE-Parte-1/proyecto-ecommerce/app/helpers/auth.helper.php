@@ -13,8 +13,9 @@ class AuthHelper
     {
         AuthHelper::init();
         $_SESSION['USER_ID'] = $user->Id_usuario;
-        $_SESSION['USER_USERNAME'] = $user->Username;
+        $_SESSION['USER_IS_SUPERADMIN'] = $user->SuperAdmin;
         $_SESSION['USER_IS_ADMIN'] = $user->EsAdmin;
+        $_SESSION['USER_USERNAME'] = $user->Username;
     }
 
     public static function logout()

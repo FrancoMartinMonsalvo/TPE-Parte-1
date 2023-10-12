@@ -15,6 +15,16 @@ class UserModel
         $this->closeConn = $this->database->closeConnection();
     }
 
+    public function getAllUsers()
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM usuarios");
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $this->closeConn;
+
+        return $result;
+    }
+
     public function getByUsername($username)
     {
         $stmt = $this->conn->prepare("SELECT * FROM usuarios WHERE Username = :Username");
@@ -26,18 +36,37 @@ class UserModel
         return $result;
     }
 
-    public function createUser($Email, $Username, $Password)
+    public function createUser($email, $username, $password)
     {
-        $hashedPassword = password_hash($Password, PASSWORD_DEFAULT);
-        $conn = $this->database->getConnection();
+        try {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $this->conn->prepare("INSERT INTO usuarios (Email, Username, Password) VALUES (:email, :username, :password)");
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $hashedPassword);
+            $stmt->execute();
 
-        $stmt = $conn->prepare("INSERT INTO usuarios (Email, Username, Password) VALUES (:Email, :Username, :Password)");
-        $stmt->bindParam(':Email', $Email);
-        $stmt->bindParam(':Username', $Username);
-        $stmt->bindParam(':Password', $hashedPassword);
+            $this->closeConn;
 
-        $this->closeConn;
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 
-        return $stmt->execute();
+    public function upgradeToAdmin($id)
+    {
+        try {
+            $stmt = $this->conn->prepare("UPDATE usuarios SET EsAdmin = 1 WHERE Id_usuario = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $this->closeConn;
+
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 }

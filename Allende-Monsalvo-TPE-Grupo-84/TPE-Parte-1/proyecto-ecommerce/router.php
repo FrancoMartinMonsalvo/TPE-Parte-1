@@ -74,6 +74,14 @@ switch ($params[0]) {
         $userController = new UserController();
         $userController->signUp();
         break;
+    case 'users':
+        $userController = new UserController();
+        $userController->showListUsers();
+        break;
+    case 'makeToAdmin':
+        $userController = new UserController();
+        $userController->makeToAdmin($params[1]);
+        break;
     case 'auth':
         $authController = new AuthController();
         $authController->auth();

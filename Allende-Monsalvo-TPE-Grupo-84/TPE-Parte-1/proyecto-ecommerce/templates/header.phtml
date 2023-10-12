@@ -29,9 +29,6 @@
                         </li>
                         <?php if (!isset($_SESSION['USER_ID'])) : ?>
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="register">Register</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="login">Login</a>
                             </li>
                         <?php endif; ?>
@@ -39,6 +36,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" aria-current="page" href="logout">Logout (<?= $_SESSION['USER_USERNAME'] ?>)</a>
                             </li>
+                        <?php endif; ?>
+                        <?php if (isset($_SESSION['USER_IS_SUPERADMIN']) && $_SESSION['USER_IS_SUPERADMIN']) : ?>
+                            <div>
+                                <a href="users" type="button" class="btn btn-primary mb-1">Users</a>
+                            </div>
                         <?php endif; ?>
                     </ul>
                 </div>

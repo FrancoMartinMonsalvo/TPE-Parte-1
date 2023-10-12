@@ -18,6 +18,14 @@ class UserController
         $this->userView->showRegister();
     }
 
+    public function showListUsers()
+    {
+        AuthHelper::verify();
+        $users = $this->userModel->getAllUsers();
+
+        $this->userView->showListUsers($users);
+    }
+
     public function signup()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -30,8 +38,20 @@ class UserController
                 header('Location: ' . BASE_URL);
                 exit();
             } else {
-                echo "Error al registrar el usuario.";
+                $this->userView->showError("Error al registrarse.");
             }
+        }
+    }
+
+    public function makeToAdmin($id)
+    {
+        $makeAdmin = $this->userModel->upgradeToAdmin($id);
+
+        if ($makeAdmin) {
+            header('Location: ' . BASE_URL . "users");
+            exit();
+        } else {
+            $this->userView->showError("Error al convertir al usuario en Administrador.");
         }
     }
 }
