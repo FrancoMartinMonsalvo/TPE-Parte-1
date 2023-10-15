@@ -1,13 +1,28 @@
 <?php require_once 'header.phtml' ?>
 
+<style>
+    .image-same-size {
+        max-width: 100%;
+        height: 100%;
+    }
+</style>
 <div class="container mt-5">
-    <div class="d-flex justify-content-center">
-        <div class="card" style="width: 20rem;">
-            <img src="<?= $game[$id]->Imagen ?>" class="card-img-top" alt="Imagen del producto" style="max-height: 350px;">
-            <div class="card-body text-center">
-                <h2 class="card-title"><?= $game[$id]->Nombre ?></h2>
-                <p class="card-text">Categoría: <?= $game[$id]->Categoria ?></p>
-                <p class="card-text">$<?= $game[$id]->Precio ?></p>
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="row no-gutters">
+                    <div class="col-md-5 d-flex align-items-center">
+                        <img src="<?= $game[$id]->Imagen ?>" class="rounded-start image-same-size" alt="<?= $game[$id]->Nombre ?>">
+                    </div>
+                    <div class="col-md-7">
+                        <div>
+                            <h3 class="card-title border-bottom"><?= $game[$id]->Nombre ?></h3>
+                            <p class="card-text fw-semibold"><?= $game[$id]->Descripcion ?></p>
+                            <p class="card-text">Category: <?= $game[$id]->Categoria ?></p>
+                            <p class="card-text">$<?= $game[$id]->Precio ?></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

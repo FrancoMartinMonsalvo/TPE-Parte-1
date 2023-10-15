@@ -4,35 +4,49 @@
     <div>
         <h1>Lista de Juegos</h1>
     </div>
-    <?php if (isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) : ?>
+    <?php if ((isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) || (isset($_SESSION['USER_IS_SUPERADMIN']) && $_SESSION['USER_IS_SUPERADMIN'])) : ?>
         <div>
             <a href="formGame" type="button" class="btn btn-primary mb-1">addGame</a>
         </div>
     <?php endif; ?>
 </div>
-<?php foreach ($games as $key => $game) : ?>
-    <div class="card my-2">
-        <div class="card-header">
-            <h5 class="card-title">
-                <a href="game/<?= $key ?>" style="text-decoration: none; font-size: 30px;">
-                    <?= $game->Nombre ?>
-                </a>
-            </h5>
-        </div>
-        <div class="d-flex justify-content-between">
-            <div class="card-body">
-                <img src="<?= $game->Imagen ?>" alt="<?= $game->Nombre ?>" class="mb-2 object-fit-cover" style="max-width: 460px;">
-                <p class="card-text">Precio: $<?= $game->Precio; ?></p>
-                <p class="card-text">Categoria: <?= $game->Categoria; ?></p>
-            </div>
-            <?php if (isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) : ?>
-                <div class="d-flex flex-column align-items-center justify-content-center me-3">
-                    <a href="editGame/<?= $game->Id_juego . "/" . $key ?>" type="button" class="btn btn-primary mb-1">Edit</a>
-                    <a href="deleteGame/<?= $game->Id_juego ?>?>" type="button" class="btn btn-danger mt-1">Delete</a>
+<div class="container">
+    <div class="row">
+        <?php foreach ($games as $key => $game) : ?>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2">
+                <div class="card mb-2 h-100">
+                    <div class="card-header text-center">
+                        <?php if (strlen($game->Nombre) <= 17) : ?>
+                            <h5 class="card-title">
+                                <a href="game/<?= $key ?>" style="text-decoration: none; font-size: 20px;">
+                                    <?= $game->Nombre ?>
+                                </a>
+                            </h5>
+                        <?php else : ?>
+                            <h5 class="card-title">
+                                <a href="game/<?= $key ?>" style="text-decoration: none; font-size: 20px;">
+                                    <?= substr($game->Nombre, 0, 17) . '...' ?>
+                                </a>
+                            </h5>
+                        <?php endif; ?>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="<?= $game->Imagen ?>" alt="<?= $game->Nombre ?>" class="mb-2 object-fit-cover" style="max-width: 100%; max-height: 140px;">
+                        </div>
+                        <p class="card-text">Precio: $<?= $game->Precio; ?></p>
+                        <p class="card-text">Categoria: <?= $game->Categoria; ?></p>
+                    </div>
+                    <?php if ((isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) || (isset($_SESSION['USER_IS_SUPERADMIN']) && $_SESSION['USER_IS_SUPERADMIN'])) : ?>
+                        <div class="d-flex align-items-center justify-content-center mb-2">
+                            <a href="editGame/<?= $game->Id_juego . "/" . $key ?>" type="button" class="btn btn-primary me-1">Edit</a>
+                            <a href="deleteGame/<?= $game->Id_juego ?>" type="button" class="btn btn-danger ms-1">Delete</a>
+                        </div>
+                    <?php endif; ?>
                 </div>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php endforeach; ?>
     </div>
-<?php endforeach; ?>
+</div>
 
 <?php require_once 'footer.phtml' ?>

@@ -4,7 +4,7 @@
     <div>
         <h1>Lista de Categorias</h1>
     </div>
-    <?php if (isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) : ?>
+    <?php if ((isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) || (isset($_SESSION['USER_IS_SUPERADMIN']) && $_SESSION['USER_IS_SUPERADMIN'])) : ?>
         <div>
             <a href="formCategory" type="button" class="btn btn-primary mb-1">addCategory</a>
         </div>
@@ -29,7 +29,7 @@
                 <p class="card-text">Cantidad de juegos disponibles: <?= $category->Cantidad_juegos; ?></p>
             </div>
             <?php if (isset($_SESSION['USER_ID'])) : ?>
-                <?php if (isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) : ?>
+                <?php if ((isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) || (isset($_SESSION['USER_IS_SUPERADMIN']) && $_SESSION['USER_IS_SUPERADMIN'])) : ?>
                     <div class="d-flex flex-column align-items-center justify-content-center me-3">
                         <a href="editCategory/<?= $category->Id_categoria . "/" . $key ?>" type="button" class="btn btn-primary mb-1">Edit</a>
                         <a href="deleteCategory/<?= $category->Id_categoria ?>?>" type="button" class="btn btn-danger mt-1">Delete</a>
