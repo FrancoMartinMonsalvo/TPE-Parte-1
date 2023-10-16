@@ -30,16 +30,22 @@
         <div class="mb-3">
             <label for="categoria" class="form-label">Categoría del Juego</label>
             <select class="form-select" id="categoria" name="categoria" required>
-                <option value="" selected disabled>SELECIONAR UNA OPCIÓN</option>
                 <?php foreach ($categories as $category) : ?>
-                    <option value=" <?= $category->Id_categoria ?>"><?= $category->Nombre ?></option>
+                    <?php if ($category->Id_categoria === $game[$key]->Id_categoria) : ?>
+                        <option value="<?= $category->Id_categoria ?>" selected><?= $category->Nombre ?></option>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+                <?php foreach ($categories as $category) : ?>
+                    <?php if ($category->Id_categoria !== $game[$key]->Id_categoria) : ?>
+                        <option value=" <?= $category->Id_categoria ?>"><?= $category->Nombre ?></option>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </select>
         </div>
         <div class="mb-3 d-flex align-items-center">
             <div class="w-75 me-3">
                 <label for="imagen" class="form-label">Imagen del Juego (LINK)</label>
-                <input type="text" class="form-control" id="imagen" name="imagen" required value="<?= $mode === 'edit' ? $game[$key]->Imagen : "" ?>">
+                <input type="text" class="form-control" id="imagen" name="imagen" value="<?= $mode === 'edit' ? $game[$key]->Imagen : "" ?>">
             </div>
             <?php if ($mode === 'edit') : ?>
                 <div>

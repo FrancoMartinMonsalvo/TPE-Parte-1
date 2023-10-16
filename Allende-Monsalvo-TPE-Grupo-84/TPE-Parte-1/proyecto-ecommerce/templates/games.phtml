@@ -1,28 +1,34 @@
 <?php require_once 'header.phtml' ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./app/styles/bodyHeader.css"> 
-  <link rel="stylesheet" href="./app/styles/listGames.css"> 
-  <title>Tienda de Juegos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./app/styles/bodyHeader.css">
+    <link rel="stylesheet" href="./app/styles/listGames.css">
+    <title>Tienda de Juegos</title>
 </head>
+
 <body>
-  
-    <h1 class="text-center">Lista de Juegos</h1>
+    <div class="d-flex align-items-center justify-content-between mx-3">
+        <div>
+            <h1>Lista de Juegos</h1>
+        </div>
         <?php if ((isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) || (isset($_SESSION['USER_IS_SUPERADMIN']) && $_SESSION['USER_IS_SUPERADMIN'])) : ?>
-            <div class="align-item-end d-flex justify-content-end">
-            <a href="formGame" type="button" class="btn btn-primary mb-1">Agregar Juego</a>
+            <div>
+                <a href="formGame" type="button" class="btn btn-primary mb-1">Agregar Juego</a>
+            </div>
         <?php endif; ?>
-    <div>    
-        <div class="row mt-4">
+    </div>
+    <div>
+        <div class="row mt-4 mx-2">
             <?php foreach ($games as $key => $game) : ?>
                 <div class="col-md-3 mb-4">
-                    <div class="card juego"> <!-- Aplicando la clase 'juego' -->
-                        <div style="max-height: 200px; overflow: hidden;">
-                            <img src="<?= $game->Imagen ?>" alt="<?= $game->Nombre ?>" class="card-img-top img-fluid" style="object-fit: cover;">
+                    <div class="card juego h-100">
+                        <div>
+                            <img src="<?= $game->Imagen ?>" alt="<?= $game->Nombre ?>" class="card-img-top img-fluid" style="max-height: 122px;">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">
@@ -32,7 +38,7 @@
                             </h5>
                             <p class="card-text">Precio: $<?= $game->Precio; ?></p>
                             <p class="card-text">Categoría: <?= $game->Categoria; ?></p>
-                            <?php if (isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) : ?>
+                            <?php if (isset($_SESSION['USER_ID']) && ((isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) || (isset($_SESSION['USER_IS_SUPERADMIN']) && $_SESSION['USER_IS_SUPERADMIN']))) : ?>
                                 <div class="text-center">
                                     <a href="editGame/<?= $game->Id_juego . "/" . $key ?>" type="button" class="btn btn-primary btn-sm">Editar</a>
                                     <a href="deleteGame/<?= $game->Id_juego ?>" type="button" class="btn btn-danger btn-sm">Eliminar</a>
@@ -45,11 +51,4 @@
         </div>
     </div>
 
-  <?php require_once 'footer.phtml' ?>
-</body>
-</html>
-
-
-
-
-
+    <?php require_once 'footer.phtml' ?>
