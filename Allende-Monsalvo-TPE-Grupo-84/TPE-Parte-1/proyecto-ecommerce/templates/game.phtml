@@ -1,29 +1,31 @@
 <?php require_once 'header.phtml' ?>
+<!DOCTYPE html>
+<html lang="es">
 
-<style>
-    .image-same-size {
-        max-width: 100%;
-        height: 100%;
-    }
-</style>
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
+<head>
+    <meta charset="UTF-8">
+    <base href="<?= BASE_URL ?>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="./app/styles/bodyHeader.css">
+    <link rel="stylesheet" href="./app/styles/detailGame.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card-container">
             <div class="card">
-                <div class="row no-gutters">
-                    <div class="col-md-5 d-flex align-items-center">
-                        <img src="<?= $game[$id]->Imagen ?>" class="rounded-start image-same-size" alt="<?= $game[$id]->Nombre ?>">
-                    </div>
-                    <div class="col-md-7">
-                        <div>
-                            <h3 class="card-title border-bottom"><?= $game[$id]->Nombre ?></h3>
-                            <p class="card-text fw-semibold"><?= $game[$id]->Descripcion ?></p>
-                            <p class="card-text">Category: <?= $game[$id]->Categoria ?></p>
-                            <p class="card-text">$<?= $game[$id]->Precio ?></p>
-                        </div>
-                    </div>
+                <img src="<?= $game[$id]->Imagen ?>" class="card-img-top" alt="Imagen del producto">
+                <div class="card-body text-center">
+                    <h2 class="card-title"><?= $game[$id]->Nombre ?></h2>
+                    <p class="card-text"><?= $game[$id]->Descripcion ?></p>
+                    <p class="card-text categoria">Categoría: <?= $game[$id]->Categoria ?></p>
+                    <p class="card-text ">$<?= $game[$id]->Precio ?></p>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</body>
+
+</html>

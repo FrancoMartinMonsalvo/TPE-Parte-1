@@ -1,0 +1,29 @@
+body {
+    background-color: #171a21; 
+    color: #FFFFFF; 
+}
+header {
+    background-color: #171a21; 
+}
+
+.navbar-brand {
+    color: #BBE1FA; 
+    font-size: 24px; 
+}
+
+.navbar-toggler {
+    border: 1px solid #BBE1FA; 
+}
+
+.nav-link {
+    color: #BBE1FA; 
+}
+
+.nav-link:hover {
+    color: #FFFFFF; 
+}
+
+.navbar-nav .nav-item {
+    margin: 0 10px; 
+}
+

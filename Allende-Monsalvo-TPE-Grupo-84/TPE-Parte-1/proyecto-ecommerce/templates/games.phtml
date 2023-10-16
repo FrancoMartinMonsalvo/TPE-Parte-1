@@ -1,52 +1,54 @@
 <?php require_once 'header.phtml' ?>
-
-<div class="d-flex justify-content-between align-items-center mx-2">
-    <div>
-        <h1>Lista de Juegos</h1>
-    </div>
-    <?php if ((isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) || (isset($_SESSION['USER_IS_SUPERADMIN']) && $_SESSION['USER_IS_SUPERADMIN'])) : ?>
-        <div>
-            <a href="formGame" type="button" class="btn btn-primary mb-1">addGame</a>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./app/styles/bodyHeader.css"> 
+  <link rel="stylesheet" href="./app/styles/listGames.css"> 
+  <title>Tienda de Juegos</title>
+</head>
+<body>
+  
+    <h1 class="text-center">Lista de Juegos</h1>
+        <div class="align-item-end d-flex justify-content-end">
+            <a href="formGame" type="button" class="btn btn-primary mb-1">Agregar Juego</a>
         </div>
-    <?php endif; ?>
-</div>
-<div class="container">
-    <div class="row">
-        <?php foreach ($games as $key => $game) : ?>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12 my-2">
-                <div class="card mb-2 h-100">
-                    <div class="card-header text-center">
-                        <?php if (strlen($game->Nombre) <= 17) : ?>
+    <div>    
+        <div class="row mt-4">
+            <?php foreach ($games as $key => $game) : ?>
+                <div class="col-md-3 mb-4">
+                    <div class="card juego"> <!-- Aplicando la clase 'juego' -->
+                        <div style="max-height: 200px; overflow: hidden;">
+                            <img src="<?= $game->Imagen ?>" alt="<?= $game->Nombre ?>" class="card-img-top img-fluid" style="object-fit: cover;">
+                        </div>
+                        <div class="card-body">
                             <h5 class="card-title">
-                                <a href="game/<?= $key ?>" style="text-decoration: none; font-size: 20px;">
+                                <a href="game/<?= $key ?>" style="text-decoration: none; font-size: 16px;">
                                     <?= $game->Nombre ?>
                                 </a>
                             </h5>
-                        <?php else : ?>
-                            <h5 class="card-title">
-                                <a href="game/<?= $key ?>" style="text-decoration: none; font-size: 20px;">
-                                    <?= substr($game->Nombre, 0, 17) . '...' ?>
-                                </a>
-                            </h5>
-                        <?php endif; ?>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-center align-items-center">
-                            <img src="<?= $game->Imagen ?>" alt="<?= $game->Nombre ?>" class="mb-2 object-fit-cover" style="max-width: 100%; max-height: 140px;">
+                            <p class="card-text">Precio: $<?= $game->Precio; ?></p>
+                            <p class="card-text">Categoría: <?= $game->Categoria; ?></p>
+                            <?php if (isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) : ?>
+                                <div class="text-center">
+                                    <a href="editGame/<?= $game->Id_juego . "/" . $key ?>" type="button" class="btn btn-primary btn-sm">Editar</a>
+                                    <a href="deleteGame/<?= $game->Id_juego ?>" type="button" class="btn btn-danger btn-sm">Eliminar</a>
+                                </div>
+                            <?php endif; ?>
                         </div>
-                        <p class="card-text">Precio: $<?= $game->Precio; ?></p>
-                        <p class="card-text">Categoria: <?= $game->Categoria; ?></p>
                     </div>
-                    <?php if ((isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) || (isset($_SESSION['USER_IS_SUPERADMIN']) && $_SESSION['USER_IS_SUPERADMIN'])) : ?>
-                        <div class="d-flex align-items-center justify-content-center mb-2">
-                            <a href="editGame/<?= $game->Id_juego . "/" . $key ?>" type="button" class="btn btn-primary me-1">Edit</a>
-                            <a href="deleteGame/<?= $game->Id_juego ?>" type="button" class="btn btn-danger ms-1">Delete</a>
-                        </div>
-                    <?php endif; ?>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
-</div>
 
-<?php require_once 'footer.phtml' ?>
+  <?php require_once 'footer.phtml' ?>
+</body>
+</html>
+
+
+
+
+

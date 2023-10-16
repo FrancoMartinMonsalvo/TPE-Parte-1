@@ -1,0 +1,15 @@
+.juego {
+    border: 1px solid #356080;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #003366;
+}
+
+.juego h3 {
+    color: #FFFFFF;
+}
+
+.juego p {
+    color: #BBE1FA;
+}

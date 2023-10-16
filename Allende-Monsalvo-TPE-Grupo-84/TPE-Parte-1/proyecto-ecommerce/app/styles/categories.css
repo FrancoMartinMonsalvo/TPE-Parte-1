@@ -1,0 +1,29 @@
+.card {
+    background-color: #003366;
+    color: #FFFFFF;
+    border: 1px solid #356080;
+    margin-bottom: 20px;
+}
+
+.card-title a {
+    text-decoration: none;
+    font-size: 24px;
+    color: #FFFFFF;
+}
+
+.card-title a:hover {
+    color: #BBE1FA;
+}
+
+.card-body p {
+    color: #BBE1FA;
+    margin-bottom: 10px;
+}
+
+.card-body p.fw-bold {
+    font-weight: bold;
+}
+
+.card-body p:last-child {
+    margin-bottom: 0;
+}
