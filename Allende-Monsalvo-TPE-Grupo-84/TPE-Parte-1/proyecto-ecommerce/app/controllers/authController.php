@@ -32,11 +32,6 @@ class AuthController
         $user = $this->model->getByUsername($username);
 
         if ($user && password_verify($password, $user->Password)) {
-            if ($user->EsAdmin) {
-                $esAdmin = true;
-            } else {
-                $esAdmin = false;
-            }
 
             AuthHelper::login($user);
             header('Location: ' . BASE_URL);
