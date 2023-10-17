@@ -38,13 +38,15 @@
                             </h5>
                             <p class="card-text">Precio: $<?= $game->Precio; ?></p>
                             <p class="card-text">Categoría: <?= $game->Categoria; ?></p>
-                            <?php if (isset($_SESSION['USER_ID']) && ((isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) || (isset($_SESSION['USER_IS_SUPERADMIN']) && $_SESSION['USER_IS_SUPERADMIN']))) : ?>
+                        </div>
+                        <?php if (isset($_SESSION['USER_ID']) && ((isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) || (isset($_SESSION['USER_IS_SUPERADMIN']) && $_SESSION['USER_IS_SUPERADMIN']))) : ?>
+                            <div class="d-flex justify-content-center">
                                 <div class="text-center">
                                     <a href="editGame/<?= $game->Id_juego . "/" . $key ?>" type="button" class="btn btn-primary btn-sm">Editar</a>
                                     <a href="deleteGame/<?= $game->Id_juego ?>" type="button" class="btn btn-danger btn-sm">Eliminar</a>
                                 </div>
-                            <?php endif; ?>
-                        </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>
