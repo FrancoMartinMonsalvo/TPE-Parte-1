@@ -39,7 +39,10 @@ class UserModel
     public function createUser($email, $username, $password)
     {
         try {
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $psw = password_hash($password, PASSWORD_DEFAULT);
+
+            $hashedPassword = $this->addBackslashBeforeThirdDollar($psw);
+
             $stmt = $this->conn->prepare("INSERT INTO usuarios (Email, Username, Password) VALUES (:email, :username, :password)");
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':username', $username);
@@ -52,6 +55,15 @@ class UserModel
         } catch (PDOException $e) {
             return false;
         }
+    }
+
+    private function addBackslashBeforeThirdDollar($password)
+    {
+        $thirdDollarPosition = strpos($password, '$', strpos($password, '$', strpos($password, '$') + 1) + 1);
+        if ($thirdDollarPosition !== false) {
+            $password = substr_replace($password, '\\', $thirdDollarPosition, 0);
+        }
+        return $password;
     }
 
     public function upgradeToAdmin($id)
