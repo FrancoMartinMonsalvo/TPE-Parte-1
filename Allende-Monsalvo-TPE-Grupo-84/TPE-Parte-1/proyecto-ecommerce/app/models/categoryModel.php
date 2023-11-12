@@ -75,4 +75,11 @@ class CategoryModel
             return false;
         }
     }
+
+    function gameCount($id, $sign)
+    {
+        $query = $this->conn->prepare("UPDATE categorias SET Cantidad_juegos = Cantidad_juegos $sign 1 WHERE Id_categoria = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+    }
 }

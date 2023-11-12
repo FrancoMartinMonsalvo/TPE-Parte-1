@@ -27,9 +27,20 @@ class GameModel
 
     public function deleteGame($id)
     {
+        $stmt = $this->conn->prepare('SELECT Id_categoria FROM juegos WHERE Id_juego = :id');
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+
         $stmt = $this->conn->prepare("DELETE FROM juegos WHERE Id_juego = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
+
+        if ($result) {
+            $categotyId = $result->Id_categoria;
+            $categoryModel = new CategoryModel();
+            $categoryModel->gameCount($categotyId, '-');
+        }
 
         $this->closeConn;
     }
@@ -42,6 +53,9 @@ class GameModel
         $stmt->bindParam(':precio', $precio);
         $stmt->bindParam(':imagen', $imagen);
         $stmt->execute();
+
+        $categoryModel = new CategoryModel();
+        $categoryModel->gameCount($categoriaJuego, '+');
 
         $this->closeConn;
 
