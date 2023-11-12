@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2023 at 12:56 AM
+-- Generation Time: Nov 11, 2023 at 08:49 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,7 +44,8 @@ INSERT INTO `categorias` (`Id_categoria`, `Nombre`, `Descripcion`, `Cantidad_jue
 (3, 'Arcade', '\"Arcade\" video games are known for their fast-paced gameplay, frantic action, and immediate fun. Inspired by classic arcade machines that used to fill amusement arcades, these games focus on quick and accessible gameplay. The gaming experience in arcade titles is characterized by simple yet addictive challenges that test your reflexes and skills.', 1),
 (4, 'Strategy', '\"Strategy\" video games are known for their emphasis on critical thinking, planning, and resource management. These games challenge players to use their intellect to outmaneuver opponents or solve complex puzzles.', 1),
 (5, 'Metroidvania', '\"Metroidvania\" video games blend elements of exploration, action, and platforming, typically in a nonlinear world filled with secrets and upgrades. This category draws its name from two iconic game series, \"Metroid\" and \"Castlevania\", which pioneered this style of gameplay.', 3),
-(6, 'Action', 'An action game is a video game genre that emphasizes physical challenges, including hand–eye coordination and reaction time.', 1);
+(6, 'Action', 'An action game is a video game genre that emphasizes physical challenges, including hand–eye coordination and reaction time.', 1),
+(7, 'JoJo\'s Bizarre Adventure: Heritage for the Future ', 'is an arcade game developed by Capcom based on the third part of JoJo\'s Bizarre Adventure, Stardust Crusaders. It was released on September 13, 1999, on the CPS-3 arcade system. As a revision of JoJo\'s Venture, Heritage for the Future adds eight playable characters and adjusts several aspects of the game. This content comes from JoJo\'s Bizarre Encyclopedia (https://jojowiki.com/), and must be attributed to its authors if you are using it on another wiki or web page, as specified in the license.', 0);
 
 -- --------------------------------------------------------
 
@@ -58,6 +59,8 @@ CREATE TABLE `juegos` (
   `Nombre` varchar(50) NOT NULL,
   `Descripcion` varchar(500) DEFAULT NULL,
   `Precio` int(11) NOT NULL,
+  `Descuento` int(11) NOT NULL DEFAULT 0,
+  `PrecioDescuento` int(11) DEFAULT NULL,
   `Imagen` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -65,50 +68,28 @@ CREATE TABLE `juegos` (
 -- Dumping data for table `juegos`
 --
 
-INSERT INTO `juegos` (`Id_juego`, `Id_categoria`, `Nombre`, `Descripcion`, `Precio`, `Imagen`) VALUES
-(1, 1, 'Sunset riders', '\"SUNSETRIDERS\" is an action shooting game released by KONAMI in 1991. The game takes place in the American Old West during the 19th century. Four gunmen are out to claim the grand prize linked to SIR RICHARD ROSE. Enjoy this exhilarating Western with simple controls.', 5250, 'https://img.unocero.com/2020/03/sunset-riders-nintendo-switch-1-1-1024x576.jpg'),
-(2, 2, 'Euro Truck Simulator 2', 'Travel across Europe as king of the road, a trucker who delivers important cargo across impressive distances! With dozens of cities to explore, your endurance, skill and speed will all be pushed to their limits.', 1000, 'https://cdn.cloudflare.steamstatic.com/steam/apps/227300/header.jpg?t=1696680356'),
-(3, 3, 'Donkey Kong', 'Donkey Kong is a large, powerful, muscular ape with a red tie sporting his initials. The name Donkey Kong is given to three characters in the Nintendo universe, including two from the arcade games and one from the Donkey Kong Country series.', 8385, 'https://upload.wikimedia.org/wikipedia/en/1/14/Donkey_Kong_flier.jpg'),
-(4, 4, 'Age Of Empires 2 The Conquerors', 'Age of Empires II: Definitive Edition incluye \"Los últimos khanes\", que incorpora 3 campañas y 4 civilizaciones nuevas. Las frecuentes actualizaciones contienen eventos, contenido adicional, nuevos modos de juego (¡como el reciente modo cooperativo!) y funciones mejoradas.', 1500, 'https://cdn.cloudflare.steamstatic.com/steam/apps/813780/header.jpg?t=1688658568'),
-(5, 5, 'Hollow Knight', '¡Forja tu propio camino en Hollow Knight! Una aventura épica a través de un vasto reino de insectos y héroes que se encuentra en ruinas. Explora cavernas tortuosas, combate contra criaturas corrompidas y entabla amistad con extraños insectos.', 1050, 'https://cdn.cloudflare.steamstatic.com/steam/apps/367520/header.jpg?t=1695270428'),
-(6, 5, 'Blasphemous', 'Blasphemous es un juego de acción y plataformas sin piedad, con elementos de combate hack-n-slash, ambientado en el retorcido mundo de Cvstodia. Explora, mejora tus habilidades y masacra las hordas de enemigos que se interponen en tu misión para romper el ciclo de condenación eterna.', 1200, 'https://cdn.cloudflare.steamstatic.com/steam/apps/774361/header.jpg?t=1694433820'),
-(7, 5, 'Blasphemous 2', 'El Penitente se despierta una vez más para librar una lucha sin fin contra el Milagro en Blasphemous 2.', 4200, 'https://cdn.cloudflare.steamstatic.com/steam/apps/2114740/header.jpg?t=1694618661'),
-(8, 1, 'Mega Man 11', '¡Mega Man vuelve a la acción! La entrega más reciente de esta franquicia multimillonaria mezcla la desafiante acción de juego de plataformas 2D con un estilo visual renovado. El nuevo sistema de doble marcha da un nuevo giro a la gratificante mecánica de juego por la que es famosa la serie.', 1514, 'https://cdn.cloudflare.steamstatic.com/steam/apps/742300/header.jpg?t=1669873876'),
-(9, 1, 'Cuphead', 'Cuphead es un juego de acción clásico estilo \"dispara y corre\" que se centra en combates contra el jefe. Inspirado en los dibujos animados de los años 30, los aspectos visual y sonoro están diseñados con esmero empleando las mismas técnicas de la época.', 6000, 'https://cdn.cloudflare.steamstatic.com/steam/apps/268910/header.jpg?t=1695655205'),
-(10, 6, 'New World', 'Explora un emocionante MMO de mundo abierto repleto de peligros y oportunidades en el que forjarás un nuevo destino en la isla sobrenatural de Aetérnum.', 2600, 'https://cdn.cloudflare.steamstatic.com/steam/apps/1063730/header.jpg?t=1695753023');
+INSERT INTO `juegos` (`Id_juego`, `Id_categoria`, `Nombre`, `Descripcion`, `Precio`, `Descuento`, `PrecioDescuento`, `Imagen`) VALUES
+(1, 1, 'Sunset riders', 'SUNSETRIDERS is an action shooting game released by KONAMI in 1991. The game takes place in the American Old West during the 19th century. Four gunmen are out to claim the grand prize linked to SIR RICHARD ROSE. Enjoy this exhilarating Western with simple controls.', 5250, 0, NULL, 'https://img.unocero.com/2020/03/sunset-riders-nintendo-switch-1-1-1024x576.jpg'),
+(2, 2, 'Euro Truck Simulator 2', 'Travel across Europe as king of the road, a trucker who delivers important cargo across impressive distances! With dozens of cities to explore, your endurance, skill and speed will all be pushed to their limits.', 1000, 0, NULL, 'https://cdn.cloudflare.steamstatic.com/steam/apps/227300/header.jpg?t=1696680356'),
+(3, 3, 'Donkey Kong', 'Donkey Kong is a large, powerful, muscular ape with a red tie sporting his initials. The name Donkey Kong is given to three characters in the Nintendo universe, including two from the arcade games and one from the Donkey Kong Country series.', 8385, 0, NULL, 'https://upload.wikimedia.org/wikipedia/en/1/14/Donkey_Kong_flier.jpg'),
+(4, 4, 'Age Of Empires 2 The Conquerors', 'Age of Empires II: Definitive Edition incluye \"Los últimos khanes\", que incorpora 3 campañas y 4 civilizaciones nuevas. Las frecuentes actualizaciones contienen eventos, contenido adicional, nuevos modos de juego (¡como el reciente modo cooperativo!) y funciones mejoradas.', 1500, 0, NULL, 'https://cdn.cloudflare.steamstatic.com/steam/apps/813780/header.jpg?t=1688658568'),
+(5, 5, 'Hollow Knight', '¡Forja tu propio camino en Hollow Knight! Una aventura épica a través de un vasto reino de insectos y héroes que se encuentra en ruinas. Explora cavernas tortuosas, combate contra criaturas corrompidas y entabla amistad con extraños insectos.', 1050, 0, NULL, 'https://cdn.cloudflare.steamstatic.com/steam/apps/367520/header.jpg?t=1695270428'),
+(6, 5, 'Blasphemous', 'Blasphemous es un juego de acción y plataformas sin piedad, con elementos de combate hack-n-slash, ambientado en el retorcido mundo de Cvstodia. Explora, mejora tus habilidades y masacra las hordas de enemigos que se interponen en tu misión para romper el ciclo de condenación eterna.', 1200, 0, NULL, 'https://cdn.cloudflare.steamstatic.com/steam/apps/774361/header.jpg?t=1694433820'),
+(7, 5, 'Blasphemous 2', 'El Penitente se despierta una vez más para librar una lucha sin fin contra el Milagro en Blasphemous 2.', 4200, 20, 3360, 'https://cdn.cloudflare.steamstatic.com/steam/apps/2114740/header.jpg?t=1694618661'),
+(8, 1, 'Mega Man 11', '¡Mega Man vuelve a la acción! La entrega más reciente de esta franquicia multimillonaria mezcla la desafiante acción de juego de plataformas 2D con un estilo visual renovado. El nuevo sistema de doble marcha da un nuevo giro a la gratificante mecánica de juego por la que es famosa la serie.', 1514, 0, NULL, 'https://cdn.cloudflare.steamstatic.com/steam/apps/742300/header.jpg?t=1669873876'),
+(9, 1, 'Cuphead', 'Cuphead es un juego de acción clásico estilo \"dispara y corre\" que se centra en combates contra el jefe. Inspirado en los dibujos animados de los años 30, los aspectos visual y sonoro están diseñados con esmero empleando las mismas técnicas de la época.', 6000, 0, NULL, 'https://cdn.cloudflare.steamstatic.com/steam/apps/268910/header.jpg?t=1695655205'),
+(12, 3, 'JoJo\'s Bizarre Adventure: Heritage for the Future ', 'is an arcade game developed by Capcom based on the third part of JoJo\'s Bizarre Adventure, Stardust Crusaders. It was released on September 13, 1999, on the CPS-3 arcade system. As a revision of JoJo\'s Venture, Heritage for the Future adds eight playable characters and adjusts several aspects of the game. This content comes from JoJo\'s Bizarre Encyclopedia (https://jojowiki.com/), and must be attributed to its authors if you are using it on another wiki or web page, as specified in the license.', 6900, 0, NULL, 'https://static.jojowiki.com/images/thumb/e/ef/latest/20210612212002/Heritage_for_the_Future_JP_Arcade_Cover.png/400px-Heritage_for_the_Future_JP_Arcade_Cover.png');
 
 --
 -- Triggers `juegos`
 --
 DELIMITER $$
-CREATE TRIGGER `after_juego_delete` AFTER DELETE ON `juegos` FOR EACH ROW BEGIN
-    UPDATE categorias
-    SET cantidad_juegos = (
-        SELECT COUNT(*)
-        FROM juegos
-        WHERE juegos.id_categoria = categorias.id_categoria
-    )
-    WHERE id_categoria = OLD.id_categoria;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_juego_insert` AFTER INSERT ON `juegos` FOR EACH ROW BEGIN
-    UPDATE categorias
-    SET cantidad_juegos = cantidad_juegos + 1
-    WHERE id_categoria = NEW.id_categoria;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `after_juego_update` AFTER UPDATE ON `juegos` FOR EACH ROW BEGIN
-    UPDATE categorias
-    SET cantidad_juegos = (
-        SELECT COUNT(*)
-        FROM juegos
-        WHERE juegos.id_categoria = categorias.id_categoria
-    )
-    WHERE id_categoria = NEW.id_categoria;
+CREATE TRIGGER `actualizaPrecioDescuento` BEFORE UPDATE ON `juegos` FOR EACH ROW BEGIN
+  IF NEW.Descuento > 0 THEN
+    SET NEW.PrecioDescuento = NEW.Precio - (NEW.Precio * NEW.Descuento / 100);
+    ELSE 
+    	SET NEW.PrecioDescuento = null;
+  END IF;
 END
 $$
 DELIMITER ;
@@ -174,13 +155,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `Id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `juegos`
 --
 ALTER TABLE `juegos`
-  MODIFY `Id_juego` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id_juego` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
