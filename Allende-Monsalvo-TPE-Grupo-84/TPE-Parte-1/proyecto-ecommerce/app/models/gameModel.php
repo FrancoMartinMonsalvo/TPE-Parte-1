@@ -45,11 +45,12 @@ class GameModel
         $this->closeConn;
     }
 
-    public function addGame($categoriaJuego, $nombreJuego, $precio, $imagen)
+    public function addGame($categoriaJuego, $nombreJuego, $descripcion, $precio, $imagen)
     {
-        $stmt = $this->conn->prepare("INSERT INTO juegos (Id_categoria, Nombre, Precio, Imagen) VALUES (:id_categoria, :nombre, :precio, :imagen)");
+        $stmt = $this->conn->prepare("INSERT INTO juegos (Id_categoria, Nombre, Descripcion, Precio, Imagen) VALUES (:id_categoria, :nombre, :descripcion, :precio, :imagen)");
         $stmt->bindParam(':id_categoria', $categoriaJuego);
         $stmt->bindParam(':nombre', $nombreJuego);
+        $stmt->bindParam(':descripcion', $descripcion);
         $stmt->bindParam(':precio', $precio);
         $stmt->bindParam(':imagen', $imagen);
         $stmt->execute();
@@ -62,14 +63,17 @@ class GameModel
         return $this->conn->lastInsertId();
     }
 
-    public function updateGame($id, $categoriaJuego, $nombreJuego, $precio, $imagen)
+    public function updateGame($id, $categoriaJuego, $nombreJuego, $descripcion, $precio, $descuento, $precioDescuento, $imagen)
     {
         try {
-            $stmt = $this->conn->prepare("UPDATE juegos SET Id_categoria = :id_categoria, Nombre = :nombre, Precio = :precio, Imagen = :imagen WHERE Id_juego = :id");
+            $stmt = $this->conn->prepare("UPDATE juegos SET Id_categoria = :id_categoria, Nombre = :nombre, Descripcion = :descripcion, Precio = :precio, Descuento = :descuento, PrecioDescuento = :precioDescuento, Imagen = :imagen WHERE Id_juego = :id");
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':id_categoria', $categoriaJuego);
             $stmt->bindParam(':nombre', $nombreJuego);
+            $stmt->bindParam(':descripcion', $descripcion);
             $stmt->bindParam(':precio', $precio);
+            $stmt->bindParam(':descuento', $descuento);
+            $stmt->bindParam(':precioDescuento', $precioDescuento);
             $stmt->bindParam(':imagen', $imagen);
             $stmt->execute();
 

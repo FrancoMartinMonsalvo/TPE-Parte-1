@@ -27,6 +27,12 @@
             <label for="precio" class="form-label">Precio del Juego</label>
             <input type="number" class="form-control" id="precio" name="precio" required value="<?= $mode === 'edit' ? $game[$key]->Precio : "" ?>">
         </div>
+        <?php if ($mode === 'edit') : ?>
+            <div class="mb-3">
+                <label for="descuento" class="form-label">Descuento</label>
+                <input type="number" class="form-control" id="descuento" name="descuento" required value="<?= $mode === 'edit' ? $game[$key]->Descuento : "" ?>">
+            </div>
+        <?php endif; ?>
         <div class="mb-3">
             <label for="categoria" class="form-label">Categoría del Juego</label>
             <select class="form-select" id="categoria" name="categoria" required>

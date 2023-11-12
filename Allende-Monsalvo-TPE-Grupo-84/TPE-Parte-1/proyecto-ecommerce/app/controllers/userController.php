@@ -35,7 +35,7 @@ class UserController
 
             $userCreated = $this->userModel->createUser($email, $username, $password);
             if ($userCreated) {
-                header('Location: ' . BASE_URL);
+                header('Location: ' . BASE_URL . 'login');
                 exit();
             } else {
                 $this->userView->showError("Error al registrarse.");
@@ -52,6 +52,18 @@ class UserController
             exit();
         } else {
             $this->userView->showError("Error al convertir al usuario en Administrador.");
+        }
+    }
+
+    public function deleteUser($id)
+    {
+        $userToDelete = $this->userModel->deleteUser($id);
+
+        if ($userToDelete) {
+            header('Location: ' . BASE_URL . "users");
+            exit();
+        } else {
+            $this->userView->showError("Error al eliminar el usuario.");
         }
     }
 }

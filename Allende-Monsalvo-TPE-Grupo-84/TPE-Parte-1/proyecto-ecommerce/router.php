@@ -82,6 +82,10 @@ switch ($params[0]) {
         $userController = new UserController();
         $userController->makeToAdmin($params[1]);
         break;
+    case 'deleteUser':
+        $userController = new UserController();
+        $userController->deleteUser($params[1]);
+        break;
     case 'auth':
         $authController = new AuthController();
         $authController->auth();

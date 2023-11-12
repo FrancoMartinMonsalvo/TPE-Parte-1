@@ -1,13 +1,14 @@
 <?php require_once 'header.phtml' ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./app/styles/bodyHeader.css"> 
-  <link rel="stylesheet" href="./app/styles/listUsers.css"> 
-  <title>Tienda de Juegos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./app/styles/bodyHeader.css">
+    <link rel="stylesheet" href="./app/styles/listUsers.css">
+    <title>Tienda de Juegos</title>
 </head>
 
 <div class="container">
@@ -26,7 +27,10 @@
                     <?php if (!$user->SuperAdmin && !$user->EsAdmin) : ?>
                         <td><?= $user->Username ?></td>
                         <td>Usuario</td>
-                        <td><a href="makeToAdmin/<?= $user->Id_usuario ?>" class='btn btn-primary'>Hacer Admin</a></td>
+                        <td>
+                            <a href="makeToAdmin/<?= $user->Id_usuario ?>" class='btn btn-primary'>Make admin</a>
+                            <a href="deleteUser/<?= $user->Id_usuario ?>" class='btn btn-danger'>Delete user</a>
+                        </td>
                     <?php endif; ?>
                 </tr>
             <?php endforeach; ?>

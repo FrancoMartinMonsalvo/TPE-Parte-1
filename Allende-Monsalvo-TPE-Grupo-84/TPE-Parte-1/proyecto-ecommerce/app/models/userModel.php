@@ -39,9 +39,7 @@ class UserModel
     public function createUser($email, $username, $password)
     {
         try {
-            $psw = password_hash($password, PASSWORD_DEFAULT);
-
-            $hashedPassword = $this->addBackslashBeforeThirdDollar($psw);
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             $stmt = $this->conn->prepare("INSERT INTO usuarios (Email, Username, Password) VALUES (:email, :username, :password)");
             $stmt->bindParam(':email', $email);
@@ -57,15 +55,6 @@ class UserModel
         }
     }
 
-    private function addBackslashBeforeThirdDollar($password)
-    {
-        $thirdDollarPosition = strpos($password, '$', strpos($password, '$', strpos($password, '$') + 1) + 1);
-        if ($thirdDollarPosition !== false) {
-            $password = substr_replace($password, '\\', $thirdDollarPosition, 0);
-        }
-        return $password;
-    }
-
     public function upgradeToAdmin($id)
     {
         try {
@@ -78,6 +67,21 @@ class UserModel
             return true;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function deleteUser($id)
+    {
+        try {
+            $stmt = $this->conn->prepare("DELETE FROM usuarios WHERE Id_usuario = :id");
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $this->closeConn;
+
+            return true;
+        } catch (PDOException $e) {
             return false;
         }
     }

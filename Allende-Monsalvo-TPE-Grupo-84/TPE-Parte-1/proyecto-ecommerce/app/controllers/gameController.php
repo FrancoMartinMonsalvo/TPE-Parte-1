@@ -11,7 +11,7 @@ class GameController
 
     function __construct()
     {
-        AuthHelper::verify();
+        AuthHelper::init();
 
         $this->model = new GameModel();
         $this->view = new GameView();
@@ -43,6 +43,7 @@ class GameController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $categoria = $_POST['categoria'];
             $nombre = $_POST['nombre'];
+            $descripcion = $_POST['descripcion'];
             $precio = $_POST['precio'];
             $imagen = $_POST['imagen'];
 
@@ -51,7 +52,7 @@ class GameController
                 return;
             }
 
-            $success = $this->model->addGame($categoria, $nombre, $precio, $imagen);
+            $success = $this->model->addGame($categoria, $nombre, $descripcion, $precio, $imagen);
 
             if ($success) {
                 header('Location: ' . BASE_URL);
@@ -71,7 +72,10 @@ class GameController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $categoria = $_POST['categoria'];
             $nombre = $_POST['nombre'];
+            $descripcion = $_POST['descripcion'];
             $precio = $_POST['precio'];
+            $descuento = $_POST['descuento'];
+            $precioDescuento = $this->discountApply($precio, $descuento);
             $imagen = $_POST['imagen'];
 
             if (empty($nombre) || empty($precio)) {
@@ -79,7 +83,7 @@ class GameController
                 return;
             }
 
-            $success = $this->model->updateGame($id, $categoria, $nombre, $precio, $imagen);
+            $success = $this->model->updateGame($id, $categoria, $nombre, $descripcion, $precio, $descuento, $precioDescuento, $imagen);
 
             if ($success) {
                 header('Location: ' . BASE_URL);
@@ -101,5 +105,10 @@ class GameController
         $categories = $this->categoryModel->getCategories();
 
         $this->view->showAddGameForm($mode, $categories);
+    }
+
+    private function discountApply($precio, $descuento)
+    {
+        return $precio - ($precio * $descuento / 100);
     }
 }

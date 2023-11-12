@@ -12,7 +12,7 @@ class CategoryController
 
     function __construct()
     {
-        AuthHelper::verify();
+        AuthHelper::init();
 
         $this->model = new CategoryModel();
         $this->view = new CategoryView();

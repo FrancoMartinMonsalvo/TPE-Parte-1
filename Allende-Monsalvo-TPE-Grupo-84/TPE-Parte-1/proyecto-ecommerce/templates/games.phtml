@@ -36,7 +36,12 @@
                                     <?= $game->Nombre ?>
                                 </a>
                             </h5>
-                            <p class="card-text">Precio: $<?= $game->Precio; ?></p>
+                            <?php if ($game->Descuento > 0) : ?>
+                                <p class="text-decoration-line-through mb-0">Precio: $<?= $game->Precio; ?></p>
+                                <p class="">Precio descuento: $<?= $game->PrecioDescuento; ?></p>
+                            <?php else : ?>
+                                <p class="">Precio: $<?= $game->Precio; ?></p>
+                            <?php endif; ?>
                             <p class="card-text">Categoría: <?= $game->Categoria; ?></p>
                         </div>
                         <?php if (isset($_SESSION['USER_ID']) && ((isset($_SESSION['USER_IS_ADMIN']) && $_SESSION['USER_IS_ADMIN']) || (isset($_SESSION['USER_IS_SUPERADMIN']) && $_SESSION['USER_IS_SUPERADMIN']))) : ?>
